@@ -12,7 +12,8 @@ export default function UpdateRoomModal(props) {
     setRoom({ ...room, [event.target.name]: event.target.value });
   };
   const handleSubmit = (event) => {
-    props.updateRoom(room);
+    props.updateRoom(room, room.id);
+    event.preventDefault();
     console.log(room);
     props.closeModal();
   };

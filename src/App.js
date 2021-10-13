@@ -101,20 +101,16 @@ function App() {
       `https://coded-task-axios-be.herokuapp.com/rooms/${roomId}`,
       newRoom
     );
-    setRooms([response.data]);
-    console.log(response.data);
+    const updatedRooms = rooms.map((room) =>
+      room.id === roomId ? response.data : room
+    );
+    setRooms(updatedRooms);
+
+    // setRooms([...rooms, response.data]); // the roomID i selected in rooms needs to change to response.data
+    // console.log(newRoom);
+    // console.log(response.data);
   }; // added birdy brackets `` to make the room iD interchangable
   // console.log(response);
-
-  // task number 4---- [done] -----!
-  //-----------------------------------------------------------------------------------------------------------------------------------
-  //-----------------------------------------------------------------------------------------------------------------------------------
-  //-----------------------------------------------------------------------------------------------------------------------------------
-
-  // Create a msg:
-  // Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/msg/${roomId}
-  // Method: POST
-  // Data required: msg
 
   return (
     <div className="__main">
@@ -142,6 +138,12 @@ function App() {
 }
 
 export default App;
+
+// *challenege*
+// Update a room:
+// Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/${roomId}
+// Method: PUT
+// Data required: title,image,description
 
 // Create a msg:
 // Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/msg/${roomId}
