@@ -106,6 +106,16 @@ function App() {
   }; // added birdy brackets `` to make the room iD interchangable
   // console.log(response);
 
+  // task number 4---- [done] -----!
+  //-----------------------------------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------------------------------------
+
+  // Create a msg:
+  // Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/msg/${roomId}
+  // Method: POST
+  // Data required: msg
+
   return (
     <div className="__main">
       {/* <button onClick={fetchRooms}></button> */}
@@ -132,12 +142,6 @@ function App() {
 }
 
 export default App;
-
-// *challenege*
-// Update a room:
-// Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/${roomId}
-// Method: PUT
-// Data required: title,image,description
 
 // Create a msg:
 // Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/msg/${roomId}
