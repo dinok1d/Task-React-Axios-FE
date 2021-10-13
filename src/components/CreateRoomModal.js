@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 export default function CreateRoomModal(props) {
   const [room, setRoom] = useState({
+    id:"",
     title: "",
     image: "",
     description: "",

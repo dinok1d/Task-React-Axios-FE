@@ -27,7 +27,7 @@ function App() {
     try {
       const response = await axios.get(
         "https://coded-task-axios-be.herokuapp.com/rooms"
-      ); // we created "respone" so we save it in setRooms. we use await/async because
+      ); // we created "" so we save it in setRooms. we use await/async because
       // humans are slow and computers are fast. so we need to wait
       setRooms(response.data);
     } catch (error) {
@@ -55,23 +55,28 @@ function App() {
 
   const createRoom = async (newRoom) => {
     try {
-      // const respone = await axios.post(
-      //   "https://coded-task-axios-be.herokuapp.com/rooms",
-      //   newRoom
-      // );
-      // setRooms([...rooms, respone.data]);
+      const response = await axios.post(
+        "https://coded-task-axios-be.herokuapp.com/rooms",
+        newRoom
+      );
+      console.log(response.data)
+      setRooms([...rooms, response.data]);
       console.log(createRoom);
-      // we want the respone.data, and not the newRoom. because respone.data brings back an ID from the backend
+      // we want the response.data, and not the newRoom. because response.data brings back an ID from the backend
     } catch (error) {
       console.log(error);
     }
   };
 
-  const deleteRoom = (id) => {
-    // to do : call BE to delete a room
-    // Delete a room:
-    // Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/${roomId}
-    // Method: Delete
+  const deleteRoom = async(roomId) => {
+    const response= await axios.delete(`https://coded-task-axios-be.herokuapp.com/rooms/${roomId}`);
+    console.log(response)
+    
+    setRooms(rooms.filter((room)=>room.id !==roomId))
+  // to do : call BE to delete a room
+  // Delete a room:
+  // Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/${roomId}
+  // Method: Delete
   };
 
   return (
@@ -85,7 +90,7 @@ function App() {
           </Route>
           <Route exact path="/">
             <center>
-              <ChatRoomsList rooms={rooms} createRoom={createRoom} />
+              <ChatRoomsList rooms={rooms} createRoom={createRoom} deleteRoom={deleteRoom} />
             </center>
           </Route>
         </Switch>
