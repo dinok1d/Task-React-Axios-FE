@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 export default function CreateRoomModal(props) {
   const [room, setRoom] = useState({
-    id:"",
+    id: "", // added ID
     title: "",
     image: "",
     description: "",
@@ -22,9 +22,9 @@ export default function CreateRoomModal(props) {
   };
   const handleSubmit = (event) => {
     event.preventDefault(); //  stop page from refreshing -done
-    props.createRoom(room); // to do.. i'm stuck here
-    // i can't seem to call the function
-    console.log(room);
+    props.createRoom(room);
+
+    // console.log(room);
 
     // call a function from app to create a room (pass room as a parameter)
 

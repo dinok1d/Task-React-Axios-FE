@@ -27,7 +27,7 @@ function App() {
     try {
       const response = await axios.get(
         "https://coded-task-axios-be.herokuapp.com/rooms"
-      ); // we created "" so we save it in setRooms. we use await/async because
+      ); // we created "response" so we save it in setRooms. we use await/async because
       // humans are slow and computers are fast. so we need to wait
       setRooms(response.data);
     } catch (error) {
@@ -36,7 +36,7 @@ function App() {
     // console.log(response.data);
   };
   // i called a function called fetchrooms contacts the backend and gets all rooms in the backend
-
+  // console.log(response.data);
   //-----------------------------------------------------------------------------------------------------------------------------------
   //-----------------------------------------------------------------------------------------------------------------------------------
   //-----------------------------------------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ function App() {
         "https://coded-task-axios-be.herokuapp.com/rooms",
         newRoom
       );
-      console.log(response.data)
+      console.log(response.data);
       setRooms([...rooms, response.data]);
       console.log(createRoom);
       // we want the response.data, and not the newRoom. because response.data brings back an ID from the backend
@@ -67,17 +67,44 @@ function App() {
       console.log(error);
     }
   };
+  // task number 2---- [done] -----!
+  //-----------------------------------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------------------------------------
 
-  const deleteRoom = async(roomId) => {
-    const response= await axios.delete(`https://coded-task-axios-be.herokuapp.com/rooms/${roomId}`);
-    console.log(response)
-    
-    setRooms(rooms.filter((room)=>room.id !==roomId))
-  // to do : call BE to delete a room
-  // Delete a room:
-  // Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/${roomId}
-  // Method: Delete
+  const deleteRoom = async (roomId) => {
+    const response = await axios.delete(
+      `https://coded-task-axios-be.herokuapp.com/rooms/${roomId}`
+    ); // added birdy brackets `` to make the room iD interchangable
+    // console.log(response);
+
+    setRooms(rooms.filter((room) => room.id !== roomId));
+    // to do : call BE to delete a room
+    // Delete a room:
+    // Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/${roomId}
+    // Method: Delete
   };
+
+  // task number 3---- [done] -----!
+  //-----------------------------------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------------------------------------
+
+  // *challenege*
+  // Update a room:
+  // Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/${roomId}
+  // Method: PUT
+  // Data required: title,image,description
+
+  const updateRoom = async (newRoom, roomId) => {
+    const response = await axios.put(
+      `https://coded-task-axios-be.herokuapp.com/rooms/${roomId}`,
+      newRoom
+    );
+    setRooms([response.data]);
+    console.log(response.data);
+  }; // added birdy brackets `` to make the room iD interchangable
+  // console.log(response);
 
   return (
     <div className="__main">
@@ -90,7 +117,12 @@ function App() {
           </Route>
           <Route exact path="/">
             <center>
-              <ChatRoomsList rooms={rooms} createRoom={createRoom} deleteRoom={deleteRoom} />
+              <ChatRoomsList
+                rooms={rooms}
+                createRoom={createRoom}
+                deleteRoom={deleteRoom}
+                updateRoom={updateRoom}
+              />
             </center>
           </Route>
         </Switch>
