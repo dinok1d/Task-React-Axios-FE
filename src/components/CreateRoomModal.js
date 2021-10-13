@@ -1,18 +1,30 @@
-import { Modal, Button, InputGroup, Form } from 'react-bootstrap';
-import React, { useState } from 'react';
+import { Modal, Button, InputGroup, Form } from "react-bootstrap";
+import React, { useState } from "react";
 
 export default function CreateRoomModal(props) {
   const [room, setRoom] = useState({
-    title: '',
-    image: '',
-    description: '',
+    title: "",
+    image: "",
+    description: "",
     messages: [],
   });
+
+  // isOpen={isOpen}
+  // closeModal={closeModal}
+  // createRoom={props.createRooms}
+  // in CreateRoomModel a room state has been created for you
+  // fix the missing code in : handleChange, handleSubmit (read the comments they have hints)
+
   const handleChange = (event) => {
-    // to do : setRoom state based in input
+    setRoom({ ...room, [event.target.name]: event.target.value });
+    //  : setRoom state based in input -done
   };
   const handleSubmit = (event) => {
-    // to do : stop page from refreshing
+    event.preventDefault(); //  stop page from refreshing -done
+    props.createRoom(room); // to do.. i'm stuck here
+    // i can't seem to call the function
+    console.log(room);
+
     // call a function from app to create a room (pass room as a parameter)
 
     props.closeModal(); // this is to close the modal that is shown
