@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import MessageItem from './MessageItem';
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import MessageItem from "./MessageItem";
 
 function ChatRoom(props) {
   const roomSlug = useParams().roomSlug;
@@ -8,15 +8,15 @@ function ChatRoom(props) {
   const messagesList = room.messages.map((msg) => {
     return <MessageItem msg={msg.msg} />;
   });
-  const [msg, setMsg] = useState({ msg: '' });
+  const [msg, setMsg] = useState({ msg: "" });
   const handleChange = (event) => {
     setMsg({ ...msg, [event.target.name]: event.target.value });
   };
   const handleSubmit = (event) => {
-
-
+    event.preventDefault();
+    props.createMessage(msg, room.id);
+    console.log(msg);
   };
-
   return (
     <div className="main__chatcontent">
       <div className="content__header">
@@ -39,15 +39,22 @@ function ChatRoom(props) {
           <button className="addFiles">
             <i className="fa fa-plus"></i>
           </button>
-          <input
-            type="text"
-            name="msg"
-            onChange={handleChange}
-            placeholder="Type a message here"
-          />
-          <button className="btnSendMsg" onClick={handleSubmit} id="sendMsgBtn">
-            <i className="fa fa-paper-plane"></i>
-          </button>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="msg"
+              onChange={handleChange}
+              placeholder="Type a message here"
+            />
+            <button
+              type="submit"
+              className="btnSendMsg"
+              onClick={handleSubmit}
+              id="sendMsgBtn"
+            >
+              <i className="fa fa-paper-plane"></i>
+            </button>
+          </form>
         </div>
       </div>
     </div>

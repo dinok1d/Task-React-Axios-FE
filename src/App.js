@@ -105,12 +105,29 @@ function App() {
       room.id === roomId ? response.data : room
     );
     setRooms(updatedRooms);
-
     // setRooms([...rooms, response.data]); // the roomID i selected in rooms needs to change to response.data
-    // console.log(newRoom);
+    // console.log(rooms);
     // console.log(response.data);
   }; // added birdy brackets `` to make the room iD interchangable
-  // console.log(response);
+
+  // task number 4---- [done] -----!
+  //-----------------------------------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------------------------------------
+
+  // Create a msg:
+  // Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/msg/${roomId}
+  // Method: POST
+  // Data required: msg
+
+  const createMessage = async (msg, roomId) => {
+    const response = await axios.post(
+      `https://coded-task-axios-be.herokuapp.com/rooms/msg/${roomId}`,
+      msg
+    );
+    fetchRooms();
+    console.log(response.data.msg);
+  };
 
   return (
     <div className="__main">
@@ -119,7 +136,7 @@ function App() {
       <div className="main__chatbody">
         <Switch>
           <Route path="/room/:roomSlug">
-            <ChatRoom rooms={rooms} />
+            <ChatRoom rooms={rooms} createMessage={createMessage} />
           </Route>
           <Route exact path="/">
             <center>
@@ -138,14 +155,3 @@ function App() {
 }
 
 export default App;
-
-// *challenege*
-// Update a room:
-// Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/${roomId}
-// Method: PUT
-// Data required: title,image,description
-
-// Create a msg:
-// Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/msg/${roomId}
-// Method: POST
-// Data required: msg
